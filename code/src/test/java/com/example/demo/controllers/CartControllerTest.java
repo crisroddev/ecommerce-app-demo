@@ -21,7 +21,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CartControllerTest {
     @Mock
@@ -107,18 +107,6 @@ public class CartControllerTest {
         modifyCartRequest.setItemId(5L);
 
         final ResponseEntity<Cart> cartResponseEntity = cartController.removeFromcart(modifyCartRequest);
-        assertNotNull(cartResponseEntity);
-        assertEquals(404, cartResponseEntity.getStatusCodeValue());
-    }
-
-    @Test
-    public void happy_path_test_user_not_found(){
-        when(userRepository.findByUsername("Cris")).thenReturn(user);
-        when(itemRepository.findById(1L)).thenReturn(Optional.of(item));
-
-        modifyCartRequest.setUsername("Mich");
-
-        final ResponseEntity<Cart> cartResponseEntity = cartController.addTocart(modifyCartRequest);
         assertNotNull(cartResponseEntity);
         assertEquals(404, cartResponseEntity.getStatusCodeValue());
     }
